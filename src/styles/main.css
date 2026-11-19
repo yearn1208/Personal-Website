@@ -1,0 +1,444 @@
+/* ============================================================
+   全局样式：设计令牌（CSS 变量）+ 基础样式 + 通用组件
+   想换配色？改下面的 :root 与 [data-theme='dark'] 中的变量即可。
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* 背景与表面 */
+  --bg: #f6f7fb;
+  --bg-soft: #eef1f8;
+  --surface: #ffffff;
+  --surface-2: #f1f3f9;
+  --header-bg: rgba(255, 255, 255, 0.72);
+
+  /* 文字 */
+  --text: #0f172a;
+  --text-soft: #475569;
+  --muted: #64748b;
+
+  /* 描边 */
+  --border: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.16);
+
+  /* 主题色 */
+  --accent: #6366f1;
+  --accent-2: #a855f7;
+  --accent-3: #06b6d4;
+  --accent-soft: rgba(99, 102, 241, 0.1);
+  --gradient: linear-gradient(120deg, var(--accent) 0%, var(--accent-2) 55%, var(--accent-3) 100%);
+
+  /* 阴影与圆角 */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 6px 18px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 14px 40px rgba(15, 23, 42, 0.12);
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 24px;
+
+  /* 布局 */
+  --header-h: 68px;
+  --max-w: 1120px;
+  --font: 'Inter', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #080b14;
+  --bg-soft: #0c1120;
+  --surface: #10162b;
+  --surface-2: #161d36;
+  --header-bg: rgba(8, 11, 20, 0.72);
+
+  --text: #e8ecf7;
+  --text-soft: #b6c0d6;
+  --muted: #8b96b3;
+
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  --accent: #818cf8;
+  --accent-2: #c084fc;
+  --accent-3: #22d3ee;
+  --accent-soft: rgba(129, 140, 248, 0.14);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 18px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------------- 基础 ---------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: rgba(99, 102, 241, 0.3);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------------- 布局 ---------------- */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.container--narrow {
+  max-width: 840px;
+}
+
+.section {
+  padding-block: 88px;
+}
+
+.section--soft {
+  background: var(--bg-soft);
+  border-block: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 60px;
+  }
+  .container {
+    padding-inline: 20px;
+  }
+}
+
+/* ---------------- 卡片 ---------------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------------- 按钮 ---------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn--primary {
+  background: var(--gradient);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(99, 102, 241, 0.3);
+}
+
+.btn--primary:hover {
+  box-shadow: 0 14px 32px rgba(99, 102, 241, 0.42);
+}
+
+.btn--ghost {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-soft);
+}
+
+.btn--ghost:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+/* ---------------- 图标按钮 ---------------- */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+/* ---------------- 标签 ---------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-soft);
+  font-size: 12.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.chip--sm {
+  padding: 3px 9px;
+  font-size: 12px;
+}
+
+/* ---------------- 文本强调 ---------------- */
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.eyebrow__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--gradient);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 600;
+  transition: gap 0.2s ease, opacity 0.2s ease;
+}
+
+.text-link:hover {
+  gap: 10px;
+  opacity: 0.85;
+}
+
+/* ---------------- 项目卡片网格 ---------------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 24px;
+}
+
+/* ---------------- 技能分组（首页 / 关于页共用） ---------------- */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.skills__group {
+  padding: 24px;
+}
+
+.skills__title {
+  margin: 0 0 16px;
+  font-size: 15px;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------------- 封面渐变 ---------------- */
+.cover {
+  --cover-a: #6366f1;
+  --cover-b: #8b5cf6;
+  position: relative;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--cover-a), var(--cover-b));
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 22% 18%, rgba(255, 255, 255, 0.28), transparent 45%),
+    radial-gradient(circle at 82% 92%, rgba(0, 0, 0, 0.18), transparent 52%);
+  pointer-events: none;
+}
+
+.cover--indigo {
+  --cover-a: #6366f1;
+  --cover-b: #8b5cf6;
+}
+.cover--violet {
+  --cover-a: #8b5cf6;
+  --cover-b: #d946ef;
+}
+.cover--cyan {
+  --cover-a: #06b6d4;
+  --cover-b: #3b82f6;
+}
+.cover--emerald {
+  --cover-a: #10b981;
+  --cover-b: #14b8a6;
+}
+.cover--amber {
+  --cover-a: #f59e0b;
+  --cover-b: #f97316;
+}
+.cover--rose {
+  --cover-a: #f43f5e;
+  --cover-b: #ec4899;
+}
+
+/* ---------------- 滚动入场动画（配合 v-reveal 指令） ---------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal--visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------------- 路由切换动画 ---------------- */
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+/* ---------------- 减少动态效果 ---------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
