@@ -26,6 +26,7 @@ const initial = profile.name.slice(0, 1)
       <div class="container hero__inner">
         <div class="hero__content">
           <p class="hero__badge">
+            <h1>111111111</h1>
             <span class="hero__status" aria-hidden="true" />
             开放合作 · {{ profile.location }}
           </p>
