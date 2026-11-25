@@ -1,8 +1,8 @@
 # 依赖
 node_modules
 
-# 构建产物
-# dist
+# 构建产物（由 GitHub Actions 构建部署，不提交）
+dist
 dist-ssr
 
 # 本地环境

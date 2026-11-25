@@ -13,7 +13,7 @@ export default defineConfig({
     port: 5173,
     open: true,
   },
-  // 如果部署到 GitHub Pages 的子路径（如 https://user.github.io/repo/），
-  // 把下面的 base 改成 '/repo/' 即可。
-  base: '/Personal-Website/dist/',
+  // 部署到 GitHub Pages 子路径：https://yearn1208.github.io/Personal-Website/
+  // 仓库改名时这里要同步修改。
+  base: '/Personal-Website/',
 })
